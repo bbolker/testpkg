@@ -32,7 +32,7 @@ jobs:
       - name: Install pkgdown.extras and remotes
         run: |
           install.packages('remotes') 
-          remotes::install_github("HenrikBengtsson/pkgdown.extras")
+          remotes::install_github("bbolker/pkgdown.extras")
         shell: Rscript {0}
       - name: Query dependencies
         run: |  # I know remotes is duplicated, but takes little time and better if we want to copy-paste workflows..
