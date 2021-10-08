@@ -67,7 +67,7 @@ jobs:
         shell: Rscript {0}
       - name: Rebuild site 
         run: |
-          pkgdown.extras::build_site(pkg=".", preview=FALSE)
+          pkgdown.extras::build_site(pkg="pkg", preview=FALSE)
         shell: Rscript {0}
       - name: Commit site
         run: |
