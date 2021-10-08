@@ -1,0 +1,50 @@
+---
+title: "Test"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Test}
+  %\VignettePackage{test}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+params:
+  EVAL: !r identical(Sys.getenv("NOT_CRAN"), "true")
+---
+
+```{r setup, include=FALSE, message=FALSE}
+library(knitr)
+```
+
+This vignette is 
+
+### Some equations
+
+First, let's consider a simple time series model. Assume that our
+measurements $Y(t)$ are given at discrete times $t \in \{1,...,n\}$ by
+
+$$Y(t) = \mu + X(t) + \varepsilon(t)$$
+
+where
+
+- $\mu$ is the mean value parameter.
+- $X(t)$ is a stationary AR(1) process, i.e. has covariance $cov(X(s),
+  X(t)) = \sigma^2\exp(-\theta |t-s|)$.
+- $\varepsilon(t)$ is iid. $N(0,\sigma_0^2)$ measurement error.
+
+## General latent variable model
+Consider a generalized linear mixed model
+
+\begin{equation}
+g(\boldsymbol{\mu}) = \boldsymbol{X\beta} + \boldsymbol{Zb}
+\end{equation}
+
+where $g(.)$ is the link function; $\boldsymbol{\beta}$ is a p-dimensional vector of regression coefficients related to the covariates; $\boldsymbol{X}$ is an $n \times p$ model matrix; and $\boldsymbol{Z}$ is the $n\times q$ model matrix for the $q$-dimensional vector-valued random effects variable $\boldsymbol{U}$ which is multivariate normal with mean zero and a parameterized $q \times q$ variance-covariance matrix, $\boldsymbol{\Sigma}$, i.e., $\boldsymbol{U} \sim N(\boldsymbol{0}, \boldsymbol{\Sigma})$.
+
+A general latent variable model (GLVM) requires many fewer parameters for the variance-covariance matrix, $\boldsymbol{\Sigma}$. To a fit a GLVM we add a *reduced-rank* (rr) covariance structure, so the model becomes
+<!-- -->
+\begin{align}
+g(\boldsymbol{\mu}) &= \boldsymbol{X\beta} + \boldsymbol{Z(I_n \otimes \Lambda)b} \\
+&= \boldsymbol{X\beta} + \boldsymbol{Zb_{new}}
+\end{align}
+<!-- -->
+where $\otimes$ is the Kronecker product and $\boldsymbol{\Lambda} = (\boldsymbol{\lambda_1}, \ldots, \boldsymbol{\lambda_d})'$ is the $q \times d$ matrix of factor loadings (with $d \ll q$). The upper triangular elements of  $\boldsymbol{\Lambda}$ are set to be zero to ensure parameter identifiability. Here we assume that the latent variables follow a multivariate standard normal distribution, $\boldsymbol{b} \sim N(\boldsymbol{0}, \boldsymbol{I})$.

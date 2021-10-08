@@ -1,0 +1,30 @@
+\documentclass[12pt]{article}
+%% vignette index specifications need to be *after* \documentclass{}
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{test2}
+%\VignettePackage{glmmTMB}
+\usepackage{hyperref}
+
+\title{Test Rnw vignette}
+\author{Ben Bolker}
+\date{\today}
+\begin{document}
+\maketitle
+
+%\linenumbers
+
+<<setopts,echo=FALSE,message=FALSE>>=
+library("knitr")
+opts_chunk$set(fig.width=5,fig.height=5,
+               out.width="0.8\\textwidth",
+               echo = TRUE, error = FALSE,
+               eval = identical(Sys.getenv("NOT_CRAN"), "true"))
+Rver <- paste(R.version$major,R.version$minor,sep=".")
+@
+
+\section{Introduction/quick start}
+
+This is an R package. It has nothing to do with
+the \href{https://github.com/kaskr/adcomp}{Template Model Builder}
+
+\end{document}
